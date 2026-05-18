@@ -1,1 +1,213 @@
-Meowdy Yall
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JaceAt1HP • 1HP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        
+        .glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(24px);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .nav-link:hover:after { width: 100%; }
+
+        .hero-bg {
+            background: radial-gradient(at center top, rgba(59, 130, 246, 0.25), transparent 70%);
+        }
+
+        .medal-1 { background: linear-gradient(135deg, #ffd700, #ffaa00); color: black; }
+        .medal-2 { background: linear-gradient(135deg, #c0c0c0, #a8a8a8); color: black; }
+        .medal-3 { background: linear-gradient(135deg, #cd7f32, #b36b2a); color: black; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white overflow-x-hidden">
+
+    <!-- LIVE STATUS BAR -->
+    <div id="live-bar" class="fixed top-0 left-0 right-0 z-[100] hidden border-b border-red-500/30 bg-zinc-950/90 backdrop-blur-md">
+        <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-center gap-x-3 text-red-400 font-medium text-sm">
+            <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+            <span>JACEAT1HP IS LIVE RIGHT NOW!</span>
+            <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="ml-4 bg-red-600 hover:bg-red-500 text-white text-xs px-5 py-2 rounded-2xl flex items-center gap-x-2 font-semibold">
+                <i class="fab fa-twitch"></i> JOIN STREAM
+            </a>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <div class="w-7 h-7 bg-blue-500 rounded-xl flex items-center justify-center text-xs font-bold">1</div>
+                <span class="text-2xl font-semibold tracking-tighter">JaceAt1HP</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
+                <a href="#giveaways" class="nav-link text-zinc-400 hover:text-white">Giveaways</a>
+                <a href="#skinswap" class="nav-link text-zinc-400 hover:text-white">SkinSwap</a>
+                <a href="#leaderboard" class="nav-link text-zinc-400 hover:text-white">Top Spenders</a>
+                <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="nav-link text-zinc-400 hover:text-white">Twitch</a>
+                <a href="https://discord.gg/ZQAjjhEnTP" target="_blank" class="nav-link bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-2xl flex items-center gap-x-2">
+                    <i class="fab fa-discord"></i> Discord
+                </a>
+                <a href="https://roulo.gg/?r=1HP" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-semibold">
+                    USE CODE 1HP
+                </a>
+            </div>
+
+            <button id="mobile-menu-button" class="md:hidden text-3xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10 px-6 py-6">
+            <div class="flex flex-col gap-y-6 text-lg">
+                <a href="#giveaways" class="nav-link">Giveaways</a>
+                <a href="#skinswap" class="nav-link">SkinSwap</a>
+                <a href="#leaderboard" class="nav-link">Top Spenders</a>
+                <a href="https://www.twitch.tv/jaceat1hp" target="_blank">Twitch</a>
+                <a href="https://discord.gg/ZQAjjhEnTP" target="_blank">Discord</a>
+                <a href="https://roulo.gg/?r=1HP" target="_blank" class="bg-blue-600 py-4 text-center rounded-2xl font-semibold">USE CODE 1HP</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero, Giveaways, SkinSwap sections unchanged for brevity -->
+
+    <!-- Leaderboard - Title now centered on desktop -->
+    <section id="leaderboard" class="py-20 md:py-28 bg-zinc-950">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+                <!-- Centered Title -->
+                <div class="flex-1 text-center md:text-left">
+                    <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Top 1HP Spenders • Roulo.gg</h2>
+                    <p class="text-zinc-400 mt-2" id="last-updated">Loading...</p>
+                </div>
+                
+                <!-- Refresh Button -->
+                <button onclick="fetchLeaderboard()" 
+                        class="flex items-center gap-x-2 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl text-sm font-medium whitespace-nowrap self-center md:self-auto">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+            
+            <div class="max-w-4xl mx-auto glass border border-white/10 rounded-3xl overflow-hidden">
+                <div id="leaderboard-content" class="min-h-[420px] p-6 md:p-8"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black py-12 text-center text-zinc-500 text-sm">
+        <p>JaceAt1HP • Use code <span class="text-blue-400">1HP</span> on Roulo.gg &amp; SkinSwap</p>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // Twitch Live
+        async function checkTwitchStatus() {
+            try {
+                const res = await fetch('https://api.twitch.tv/helix/streams?user_login=jaceat1hp', {
+                    headers: { 'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko' }
+                });
+                const data = await res.json();
+                document.getElementById('live-bar').classList.toggle('hidden', !(data.data && data.data.length > 0));
+            } catch(e) {}
+        }
+
+        // Leaderboard
+        async function fetchLeaderboard() {
+            const content = document.getElementById('leaderboard-content');
+            const statusEl = document.getElementById('last-updated');
+            
+            content.innerHTML = `<div class="flex flex-col items-center justify-center h-96"><i class="fas fa-spinner fa-spin text-5xl text-blue-500 mb-6"></i><p class="text-zinc-400">Loading leaderboard...</p></div>`;
+
+            try {
+                const today = new Date().toISOString().split('T')[0];
+                const ago = new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
+                const apiUrl = `https://api.roulobets.com/v1/external/affiliates?start_at=${ago}&end_at=${today}&key=ja6dmbd3rewekyvy8hc3a1ba3pmewfow`;
+
+                const proxies = [
+                    `https://corsproxy.io/?${encodeURIComponent(apiUrl)}`,
+                    `https://api.allorigins.win/raw?url=${encodeURIComponent(apiUrl)}`
+                ];
+
+                let data = null;
+                for (let proxy of proxies) {
+                    try {
+                        const res = await fetch(proxy);
+                        if (res.ok) {
+                            data = await res.json();
+                            break;
+                        }
+                    } catch(e) {}
+                }
+
+                if (!data || !data.affiliates) throw new Error("No data");
+
+                const sorted = data.affiliates
+                    .filter(a => parseFloat(a.wagered_amount || 0) > 0)
+                    .sort((a, b) => parseFloat(b.wagered_amount) - parseFloat(a.wagered_amount));
+
+                let html = `<div class="overflow-x-auto"><table class="w-full"><thead class="bg-white/5"><tr><th class="pl-6 py-5 text-left">Rank</th><th class="py-5 text-left">Player</th><th class="py-5 text-right pr-8">Wagered</th></tr></thead><tbody>`;
+
+                sorted.slice(0, 15).forEach((player, i) => {
+                    const amount = parseFloat(player.wagered_amount).toLocaleString('en-US');
+                    let rankHTML = `#${i+1}`;
+                    if (i === 0) rankHTML = `<span class="medal-1 px-5 py-2 rounded-2xl font-bold">🥇 1st</span>`;
+                    else if (i === 1) rankHTML = `<span class="medal-2 px-5 py-2 rounded-2xl font-bold">🥈 2nd</span>`;
+                    else if (i === 2) rankHTML = `<span class="medal-3 px-5 py-2 rounded-2xl font-bold">🥉 3rd</span>`;
+
+                    html += `
+                        <tr class="border-t border-white/10 hover:bg-white/5">
+                            <td class="pl-6 py-5">${rankHTML}</td>
+                            <td class="py-5 font-medium">${player.username}</td>
+                            <td class="py-5 text-right pr-8 font-mono">$${amount}</td>
+                        </tr>`;
+                });
+
+                html += `</tbody></table></div>`;
+                content.innerHTML = html;
+                statusEl.textContent = `Updated just now`;
+
+            } catch (err) {
+                content.innerHTML = `
+                    <div class="flex flex-col items-center justify-center h-96 text-center px-6">
+                        <i class="fas fa-trophy text-6xl text-amber-400/30 mb-6"></i>
+                        <p class="text-xl text-zinc-300">Leaderboard Temporarily Unavailable</p>
+                        <button onclick="fetchLeaderboard()" class="mt-8 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl">Try Again</button>
+                    </div>`;
+            }
+        }
+
+        window.onload = () => {
+            checkTwitchStatus();
+            setInterval(checkTwitchStatus, 60000);
+            fetchLeaderboard();
+            setInterval(fetchLeaderboard, 900000);
+        };
+    </script>
+</body>
+</html>
