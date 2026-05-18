@@ -61,7 +61,6 @@
                 <span class="text-2xl font-semibold tracking-tighter">JaceAt1HP</span>
             </div>
 
-            <!-- Desktop Nav -->
             <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#giveaways" class="nav-link text-zinc-400 hover:text-white">Giveaways</a>
                 <a href="#skinswap" class="nav-link text-zinc-400 hover:text-white">SkinSwap</a>
@@ -75,7 +74,6 @@
                 </a>
             </div>
 
-            <!-- Mobile Hamburger -->
             <button id="mobile-menu-button" class="md:hidden text-3xl">
                 <i class="fas fa-bars"></i>
             </button>
@@ -96,8 +94,8 @@
 
     <!-- Hero -->
     <section class="min-h-screen hero-bg flex items-center relative pt-16">
-        <div class="max-w-screen-2xl mx-auto px-6 pt-12">
-            <div class="max-w-3xl mx-auto text-center">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="max-w-3xl mx-auto text-center pt-12">
                 <div class="inline-flex items-center gap-x-2 bg-white/5 border border-white/10 rounded-full px-6 py-2 text-sm mb-8">
                     <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
                     LIVE GIVEAWAYS EVERY STREAM
@@ -107,13 +105,13 @@
                     JACEAT<span class="text-blue-500">1HP</span>
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-zinc-400 mb-12">Daily Drops • Bi-Weekly Cash Prizes</p>
+                <p class="text-xl md:text-2xl text-zinc-400 mb-12">Daily Drops • Bi-Weekly Cash Rewards</p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/90 font-semibold text-lg px-8 py-6 rounded-3xl">
+                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/90 font-semibold text-lg px-10 py-6 rounded-3xl">
                         <i class="fab fa-twitch"></i> WATCH LIVE
                     </a>
-                    <a href="https://roulo.gg/?r=1HP" target="_blank" class="flex items-center justify-center gap-x-3 border border-white/30 hover:border-white/60 font-medium text-lg px-8 py-6 rounded-3xl">
+                    <a href="https://roulo.gg/?r=1HP" target="_blank" class="flex items-center justify-center gap-x-3 border border-white/30 hover:border-white/60 font-medium text-lg px-10 py-6 rounded-3xl">
                         CODE <span class="text-blue-400 font-bold">1HP</span>
                     </a>
                 </div>
@@ -128,7 +126,6 @@
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Giveaways Every Stream</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-                <!-- Daily -->
                 <div class="glass border border-white/10 rounded-3xl p-8 md:p-10">
                     <div class="flex justify-between items-start mb-8">
                         <div>
@@ -137,10 +134,9 @@
                         </div>
                         <span class="text-6xl">🔫</span>
                     </div>
-                    <p class="text-zinc-400">Weapon skins, cases, gloves and more dropped live.</p>
+                    <p class="text-zinc-400">Weapon skins, cases, gloves and more dropped live on stream.</p>
                 </div>
                 
-                <!-- Bi-Weekly -->
                 <div class="glass border border-white/10 rounded-3xl p-8 md:p-10">
                     <div class="flex justify-between items-start mb-8">
                         <div>
@@ -167,13 +163,14 @@
                         <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
                         <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6">Trade Boring Skins for Flashy New Ones</h2>
                         <p class="mt-6 text-zinc-400 text-lg">Seamlessly upgrade your inventory.</p>
-                        <a href="https://skinswap.com/r/1hp" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-lg px-10 py-6 rounded-3xl">
+                        <a href="https://skinswap.com/r/1hp" target="_blank" 
+                           class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-lg px-10 py-6 rounded-3xl">
                             <i class="fas fa-exchange-alt"></i> TRADE NOW
                         </a>
                     </div>
                     <div class="lg:w-1/2 text-center">
                         <div class="text-7xl mb-6">💎</div>
-                        <h3 class="text-3xl font-semibold">Instant Skin Upgrades + Free Skin up to $50 with code 1HP</h3>
+                        <h3 class="text-3xl font-semibold">Instant Skin Upgrades</h3>
                     </div>
                 </div>
             </div>
@@ -183,7 +180,7 @@
     <!-- Leaderboard -->
     <section id="leaderboard" class="py-20 md:py-28 bg-zinc-950">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
                 <div>
                     <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Top 1HP Spenders • Roulo.gg</h2>
                     <p class="text-zinc-400 mt-2" id="last-updated">Loading...</p>
@@ -206,8 +203,7 @@
     <script>
         // Mobile Menu
         document.getElementById('mobile-menu-button').addEventListener('click', () => {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
+            document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
         // Twitch Live
@@ -221,7 +217,7 @@
             } catch(e) {}
         }
 
-        // Leaderboard (working version)
+        // Leaderboard with Proxy
         async function fetchLeaderboard() {
             const content = document.getElementById('leaderboard-content');
             const statusEl = document.getElementById('last-updated');
