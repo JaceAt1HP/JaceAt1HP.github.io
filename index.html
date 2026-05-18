@@ -9,30 +9,69 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
-        body { font-family: 'Inter', system-ui, sans-serif; }
-        
-        .glass {
-            background: rgba(15, 23, 42, 0.65);
-            backdrop-filter: blur(24px);
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
+            background: #05070f;
         }
         
+        .liquid-glass {
+            background: rgba(15, 23, 42, 0.45);
+            backdrop-filter: blur(32px);
+            -webkit-backdrop-filter: blur(32px);
+            border: 1px solid rgba(100, 180, 255, 0.25);
+            box-shadow: 0 8px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .glow-blue {
+            box-shadow: 0 0 40px rgba(59, 130, 246, 0.5),
+                        inset 0 0 25px rgba(59, 130, 246, 0.15);
+        }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 25%, rgba(59, 130, 246, 0.4), transparent 70%),
+                        linear-gradient(to bottom, #0a0f1c, #05070f);
+        }
+
         .nav-link {
             position: relative;
+            transition: all 0.4s ease;
         }
         .nav-link:after {
             content: '';
             position: absolute;
             width: 0;
             height: 2px;
-            bottom: -2px;
+            bottom: -4px;
             left: 0;
-            background: linear-gradient(to right, #3b82f6, #60a5fa);
+            background: #3b82f6;
             transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .nav-link:hover:after { width: 100%; }
+
+        .card-hover {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 30px 70px -15px rgba(59, 130, 246, 0.4);
+        }
+
+        .medal-1 { animation: medalPop 2.5s ease-in-out; }
+        .medal-2 { animation: medalPop 2.5s ease-in-out 0.3s; }
+        .medal-3 { animation: medalPop 2.5s ease-in-out 0.6s; }
+
+        @keyframes medalPop {
+            0% { transform: scale(0.6) rotate(-12deg); }
+            60% { transform: scale(1.18) rotate(6deg); }
+            100% { transform: scale(1) rotate(0); }
+        }
+
+        .floating {
+            animation: float 7s ease-in-out infinite;
+        }
     </style>
 </head>
-<body class="bg-zinc-950 text-white overflow-x-hidden">
+<body class="bg-[#05070f] text-white overflow-x-hidden">
 
     <!-- LIVE STATUS BAR -->
     <div id="live-bar" class="fixed top-0 left-0 right-0 z-[100] hidden border-b border-red-500/30 bg-zinc-950/90 backdrop-blur-md">
@@ -46,10 +85,10 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/10">
+    <nav class="fixed top-0 left-0 right-0 z-50 liquid-glass border-b border-white/10">
         <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <div class="w-7 h-7 bg-blue-500 rounded-xl flex items-center justify-center text-xs font-bold">1</div>
+                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-sm font-bold shadow-lg">1</div>
                 <span class="text-2xl font-semibold tracking-tighter">JaceAt1HP</span>
             </div>
 
@@ -62,7 +101,7 @@
                 <a href="https://discord.gg/ZQAjjhEnTP" target="_blank" class="nav-link bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-2xl flex items-center gap-x-2">
                     <i class="fab fa-discord"></i> Discord
                 </a>
-                <a href="https://roulo.gg/?r=1HP" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-semibold">
+                <a href="https://roulo.gg/?r=1HP" target="_blank" class="bg-blue-600 hover:bg-blue-500 px-6 py-3 rounded-2xl font-semibold glow-blue">
                     USE CODE 1HP
                 </a>
             </div>
@@ -72,7 +111,8 @@
             </button>
         </div>
 
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10 px-6 py-6">
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden liquid-glass border-t border-white/10 px-6 py-6">
             <div class="flex flex-col gap-y-6 text-lg">
                 <a href="#giveaways" class="nav-link">Giveaways</a>
                 <a href="#skinswap" class="nav-link">SkinSwap</a>
@@ -86,19 +126,19 @@
     </nav>
 
     <!-- Hero -->
-    <section class="min-h-screen bg-gradient-to-b from-zinc-950 to-zinc-900 flex items-center relative pt-16">
+    <section class="min-h-screen hero-bg flex items-center relative pt-16">
         <div class="max-w-screen-2xl mx-auto px-6 pt-12">
             <div class="max-w-3xl mx-auto text-center">
                 <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none mb-6">
-                    JACEAT<span class="text-blue-500">1HP</span>
+                    JACEAT<span class="text-blue-400">1HP</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-zinc-400 mb-12">Daily Drops • Bi-Weekly Cash Rewards</p>
+                <p class="text-xl md:text-2xl text-zinc-300 mb-12">Daily Drops • Bi-Weekly Cash Rewards</p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/90 font-semibold text-lg px-10 py-6 rounded-3xl">
+                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/90 font-semibold text-lg px-10 py-6 rounded-3xl glow-blue">
                         <i class="fab fa-twitch"></i> WATCH LIVE
                     </a>
-                    <a href="https://roulo.gg/?r=1HP" target="_blank" class="flex items-center justify-center gap-x-3 border border-white/30 hover:border-white/60 font-medium text-lg px-10 py-6 rounded-3xl">
+                    <a href="https://roulo.gg/?r=1HP" target="_blank" class="flex items-center justify-center gap-x-3 border border-blue-400/50 hover:border-blue-400 font-medium text-lg px-10 py-6 rounded-3xl">
                         JOIN ROULO.GG • CODE <span class="text-blue-400 font-bold">1HP</span>
                     </a>
                 </div>
@@ -113,13 +153,13 @@
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Giveaways Every Stream</h2>
             </div>
             <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-                <div class="glass border border-white/10 rounded-3xl p-8 md:p-10">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 md:p-10 card-hover">
                     <span class="px-4 py-1.5 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-2xl">EVERY STREAM</span>
                     <h3 class="text-3xl md:text-4xl font-semibold mt-6">Counter-Strike Drops</h3>
                     <p class="text-zinc-400 mt-6">Weapon skins, cases, gloves and more dropped live on stream.</p>
                 </div>
                 
-                <div class="glass border border-white/10 rounded-3xl p-8 md:p-10">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 md:p-10 card-hover">
                     <span class="px-4 py-1.5 bg-purple-500/10 text-purple-400 text-xs font-bold rounded-2xl">BI-WEEKLY</span>
                     <h3 class="text-3xl md:text-4xl font-semibold mt-6">Cash Rewards</h3>
                     <p class="text-zinc-400 text-lg mt-6">Top users with code <strong>1HP</strong> win <strong>$150 every two weeks</strong></p>
@@ -132,7 +172,7 @@
     <!-- SkinSwap -->
     <section id="skinswap" class="py-20 md:py-28 bg-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="max-w-5xl mx-auto glass border border-white/10 rounded-3xl p-8 md:p-16">
+            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-8 md:p-16 card-hover">
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
                     <div class="lg:w-1/2">
                         <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
@@ -163,30 +203,30 @@
                 <p id="countdown" class="text-emerald-400 font-medium mt-2"></p>
             </div>
             
-            <div class="max-w-4xl mx-auto glass border border-white/10 rounded-3xl overflow-hidden">
+            <div class="max-w-4xl mx-auto liquid-glass border border-white/10 rounded-3xl overflow-hidden">
                 <div id="leaderboard-content" class="min-h-[420px] p-6 md:p-8"></div>
             </div>
         </div>
     </section>
 
-    <!-- Winners Board -->
+    <!-- Winners -->
     <section id="winners" class="py-20 md:py-28 bg-zinc-900">
         <div class="max-w-screen-2xl mx-auto px-6">
             <div class="text-center mb-12">
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Recent Bi-Weekly Winners</h2>
             </div>
             <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
-                <div class="glass border border-white/10 rounded-3xl p-8 text-center">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥇</div>
                     <h3 class="font-bold text-2xl text-amber-400">1st — $75</h3>
                     <p class="text-zinc-400 mt-6" id="winner1">—</p>
                 </div>
-                <div class="glass border border-white/10 rounded-3xl p-8 text-center">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥈</div>
                     <h3 class="font-bold text-2xl text-slate-300">2nd — $50</h3>
                     <p class="text-zinc-400 mt-6" id="winner2">—</p>
                 </div>
-                <div class="glass border border-white/10 rounded-3xl p-8 text-center">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥉</div>
                     <h3 class="font-bold text-2xl text-amber-800">3rd — $25</h3>
                     <p class="text-zinc-400 mt-6" id="winner3">—</p>
@@ -205,7 +245,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // Twitch
+        // Twitch Live
         async function checkTwitchStatus() {
             try {
                 const res = await fetch('https://api.twitch.tv/helix/streams?user_login=jaceat1hp', {
@@ -216,20 +256,20 @@
             } catch(e) {}
         }
 
-        // 14-day countdown
+        // 14-day Countdown
         function startCountdown() {
             const el = document.getElementById('countdown');
             function update() {
                 const now = new Date();
                 let next = new Date(now);
-                next.setDate(now.getDate() + 14 - (now.getDay() % 14));
+                next.setDate(now.getDate() + 14);
                 next.setHours(12, 0, 0, 0);
-                if (now > next) next.setDate(next.getDate() + 14);
 
                 const diff = next - now;
                 const days = Math.floor(diff / (1000*60*60*24));
                 const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
                 const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+
                 el.textContent = `Next payout in: ${days}d ${hours}h ${minutes}m`;
             }
             update();
@@ -273,9 +313,9 @@
                 sorted.slice(0, 15).forEach((player, i) => {
                     const amount = parseFloat(player.wagered_amount).toLocaleString('en-US');
                     let rankHTML = `#${i+1}`;
-                    if (i === 0) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-yellow-400 text-black">🥇 1st</span>`;
-                    else if (i === 1) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-gray-300 text-black">🥈 2nd</span>`;
-                    else if (i === 2) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-amber-700 text-white">🥉 3rd</span>`;
+                    if (i === 0) rankHTML = `<span class="medal-1 px-5 py-2 rounded-2xl font-bold">🥇 1st</span>`;
+                    else if (i === 1) rankHTML = `<span class="medal-2 px-5 py-2 rounded-2xl font-bold">🥈 2nd</span>`;
+                    else if (i === 2) rankHTML = `<span class="medal-3 px-5 py-2 rounded-2xl font-bold">🥉 3rd</span>`;
 
                     html += `<tr class="border-t border-white/10 hover:bg-white/5">
                         <td class="pl-6 py-5">${rankHTML}</td>
