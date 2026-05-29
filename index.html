@@ -25,6 +25,18 @@
         .glow-blue {
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
         }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.45), transparent 70%);
+        }
+
+        .card-hover {
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(59, 130, 246, 0.35);
+        }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -51,6 +63,7 @@
             <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
                 <a href="#giveaways" class="nav-link text-zinc-400 hover:text-white">Giveaways</a>
                 <a href="#skinswap" class="nav-link text-zinc-400 hover:text-white">SkinSwap</a>
+                <a href="#funcs2" class="nav-link text-zinc-400 hover:text-white">FUNcs2</a>
                 <a href="#leaderboard" class="nav-link text-zinc-400 hover:text-white">Top Spenders</a>
                 <a href="#winners" class="nav-link text-zinc-400 hover:text-white">Winners</a>
                 <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="nav-link text-zinc-400 hover:text-white">Twitch</a>
@@ -71,6 +84,7 @@
             <div class="flex flex-col gap-y-6 text-lg">
                 <a href="#giveaways" class="nav-link">Giveaways</a>
                 <a href="#skinswap" class="nav-link">SkinSwap</a>
+                <a href="#funcs2" class="nav-link">FUNcs2</a>
                 <a href="#leaderboard" class="nav-link">Top Spenders</a>
                 <a href="#winners" class="nav-link">Winners</a>
                 <a href="https://www.twitch.tv/jaceat1hp" target="_blank">Twitch</a>
@@ -149,6 +163,29 @@
         </div>
     </section>
 
+    <!-- New FUNcs2 Section -->
+    <section id="funcs2" class="py-20 md:py-28 bg-zinc-950">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-8 md:p-16 card-hover">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-1/2">
+                        <span class="px-5 py-2 bg-pink-500/10 text-pink-400 text-sm font-bold rounded-2xl">NEW PROMO</span>
+                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6">Get 7% Deposit Bonus on FUNcs2</h2>
+                        <p class="mt-6 text-zinc-400 text-lg">Use code <strong>1HP</strong> when depositing to receive an instant 7% bonus on your deposit.</p>
+                        <a href="https://www.funcs2.com/r/1HP" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold text-lg px-10 py-6 rounded-3xl">
+                            <i class="fas fa-plus-circle"></i> CLAIM 7% BONUS
+                        </a>
+                    </div>
+                    <div class="lg:w-1/2 text-center">
+                        <div class="text-8xl mb-6">🎰</div>
+                        <h3 class="text-3xl font-semibold">7% Deposit Bonus</h3>
+                        <p class="text-emerald-400 mt-4">Code: <strong>1HP</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Leaderboard -->
     <section id="leaderboard" class="py-20 md:py-28 bg-zinc-950">
         <div class="max-w-screen-2xl mx-auto px-6">
@@ -191,7 +228,7 @@
     </section>
 
     <footer class="bg-black py-12 text-center text-zinc-500 text-sm">
-        <p>JaceAt1HP • Use code <span class="text-blue-400">1HP</span> on <a href="https://roulo.gg/?r=1HP" target="_blank" class="hover:text-blue-400">Roulo.gg</a> &amp; SkinSwap</p>
+        <p>JaceAt1HP • Use code <span class="text-blue-400">1HP</span> on <a href="https://roulo.gg/?r=1HP" target="_blank" class="hover:text-blue-400">Roulo.gg</a>, SkinSwap & FUNcs2</p>
     </footer>
 
     <script>
@@ -211,30 +248,27 @@
             } catch(e) {}
         }
 
-        // FIXED COUNTDOWN - Monday June 1, 2026 at 12:00 PM EST
+        // 14-day Countdown (Monday June 1, 2026 12 PM EST)
         function startCountdown() {
             const el = document.getElementById('countdown');
-            
-            function updateCountdown() {
-                const target = new Date("2026-06-01T12:00:00-04:00"); // June 1, 2026, 12 PM EST
-                
-                let nextPayout = new Date(target);
+            function update() {
+                const target = new Date("2026-06-01T12:00:00-04:00");
+                let next = new Date(target);
                 const now = new Date();
                 
-                while (nextPayout < now) {
-                    nextPayout.setDate(nextPayout.getDate() + 14);
+                while (next < now) {
+                    next.setDate(next.getDate() + 14);
                 }
 
-                const diff = nextPayout - now;
-                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const diff = next - now;
+                const days = Math.floor(diff / (1000*60*60*24));
+                const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
 
                 el.textContent = `Next payout in: ${days}d ${hours}h ${minutes}m`;
             }
-
-            updateCountdown();
-            setInterval(updateCountdown, 60000);
+            update();
+            setInterval(update, 60000);
         }
 
         // Leaderboard
@@ -296,7 +330,6 @@
             }
         }
 
-        // Initialize
         window.onload = () => {
             checkTwitchStatus();
             setInterval(checkTwitchStatus, 60000);
