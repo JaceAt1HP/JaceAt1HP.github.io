@@ -25,27 +25,6 @@
         .glow-blue {
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
         }
-
-        .winner-card {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .sparkle {
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkleAnim 1.5s infinite;
-            opacity: 0;
-        }
-
-        @keyframes sparkleAnim {
-            0% { transform: scale(0); opacity: 0; }
-            50% { opacity: 1; }
-            100% { transform: scale(1.5); opacity: 0; }
-        }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -180,14 +159,14 @@
                     <div class="lg:w-1/2">
                         <span class="px-5 py-2 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-2xl">HOT BONUS</span>
                         <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6">FREE $2 + 19% Deposit Bonus</h2>
-                        <p class="mt-6 text-zinc-400 text-lg">Sign up and deposit using code <strong>1HP</strong> to claim this insane welcome offer!</p>
+                        <p class="mt-6 text-zinc-400 text-lg">Don't sleep on this — use code <strong>1HP</strong> and get FREE $2 instantly + 19% deposit bonus!</p>
                         <a href="https://www.funcs2.com/r/1HP" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold text-lg px-10 py-6 rounded-3xl">
-                            <i class="fas fa-gift"></i> CLAIM FREE $2 + 19% BONUS
+                            <i class="fas fa-gift"></i> CLAIM FREE $2 + 19% BONUS NOW
                         </a>
                     </div>
                     <div class="lg:w-1/2 text-center">
                         <div class="text-8xl mb-6">🎰</div>
-                        <h3 class="text-3xl font-semibold">Don't Miss This Deal</h3>
+                        <h3 class="text-3xl font-semibold">Insane Welcome Offer</h3>
                     </div>
                 </div>
             </div>
@@ -216,32 +195,20 @@
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Recent Bi-Weekly Winners</h2>
             </div>
             <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
-                <!-- 1st -->
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥇</div>
                     <h3 class="font-bold text-2xl text-amber-400">1st — $75</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner1">Telephone</p>
-                    <div class="sparkle" style="top: 25%; left: 30%; animation-delay: 0s;"></div>
-                    <div class="sparkle" style="top: 45%; left: 65%; animation-delay: 0.4s;"></div>
-                    <div class="sparkle" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl">Telephone</p>
                 </div>
-                
-                <!-- 2nd -->
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥈</div>
                     <h3 class="font-bold text-2xl text-slate-300">2nd — $50</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner2">pandav2</p>
-                    <div class="sparkle" style="top: 30%; left: 40%; animation-delay: 0.2s;"></div>
-                    <div class="sparkle" style="top: 55%; left: 70%; animation-delay: 0.7s;"></div>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl">pandav2</p>
                 </div>
-                
-                <!-- 3rd -->
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
                     <div class="text-5xl mb-4">🥉</div>
                     <h3 class="font-bold text-2xl text-amber-800">3rd — $25</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner3">nope</p>
-                    <div class="sparkle" style="top: 35%; left: 25%; animation-delay: 0.5s;"></div>
-                    <div class="sparkle" style="top: 65%; left: 60%; animation-delay: 1s;"></div>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl">nope</p>
                 </div>
             </div>
         </div>
@@ -268,7 +235,7 @@
             } catch(e) {}
         }
 
-        // Countdown (Monday June 1, 2026 12 PM EST)
+        // 14-day Countdown
         function startCountdown() {
             const el = document.getElementById('countdown');
             function update() {
@@ -288,20 +255,19 @@
                 el.textContent = `Next payout in: ${days}d ${hours}h ${minutes}m`;
             }
             update();
-            setInterval(update, 30000);
+            setInterval(update, 60000);
         }
 
-        // Live Leaderboard
+        // Leaderboard
         async function fetchLeaderboard() {
             const content = document.getElementById('leaderboard-content');
             const statusEl = document.getElementById('last-updated');
             
-            content.innerHTML = `<div class="flex flex-col items-center justify-center h-96"><i class="fas fa-spinner fa-spin text-5xl text-blue-500 mb-6"></i><p class="text-zinc-400">Loading live leaderboard...</p></div>`;
+            content.innerHTML = `<div class="flex flex-col items-center justify-center h-96"><i class="fas fa-spinner fa-spin text-5xl text-blue-500 mb-6"></i><p class="text-zinc-400">Loading leaderboard...</p></div>`;
 
             try {
                 const today = new Date().toISOString().split('T')[0];
-                const ago = new Date(Date.now() - 14*24*60*60*1000).toISOString().split('T')[0];
-                
+                const ago = new Date(Date.now() - 30*24*60*60*1000).toISOString().split('T')[0];
                 const apiUrl = `https://api.roulobets.com/v1/external/affiliates?start_at=${ago}&end_at=${today}&key=ja6dmbd3rewekyvy8hc3a1ba3pmewfow`;
 
                 const proxies = [
@@ -344,7 +310,7 @@
 
                 html += `</tbody></table></div>`;
                 content.innerHTML = html;
-                statusEl.textContent = `Live • Updated just now`;
+                statusEl.textContent = `Updated just now`;
 
             } catch (err) {
                 content.innerHTML = `<div class="flex flex-col items-center justify-center h-96 text-center"><p class="text-red-400">Failed to load leaderboard</p><button onclick="fetchLeaderboard()" class="mt-6 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl">Try Again</button></div>`;
