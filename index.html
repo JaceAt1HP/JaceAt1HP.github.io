@@ -25,6 +25,27 @@
         .glow-blue {
             box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
         }
+
+        .winner-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: white;
+            border-radius: 50%;
+            animation: sparkleAnim 1.5s infinite;
+            opacity: 0;
+        }
+
+        @keyframes sparkleAnim {
+            0% { transform: scale(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -195,20 +216,32 @@
                 <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Recent Bi-Weekly Winners</h2>
             </div>
             <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
+                <!-- 1st -->
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
                     <div class="text-5xl mb-4">🥇</div>
                     <h3 class="font-bold text-2xl text-amber-400">1st — $75</h3>
-                    <p class="text-zinc-400 mt-6" id="winner1">—</p>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner1">Telephone</p>
+                    <div class="sparkle" style="top: 25%; left: 30%; animation-delay: 0s;"></div>
+                    <div class="sparkle" style="top: 45%; left: 65%; animation-delay: 0.4s;"></div>
+                    <div class="sparkle" style="top: 70%; left: 25%; animation-delay: 0.8s;"></div>
                 </div>
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
+                
+                <!-- 2nd -->
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
                     <div class="text-5xl mb-4">🥈</div>
                     <h3 class="font-bold text-2xl text-slate-300">2nd — $50</h3>
-                    <p class="text-zinc-400 mt-6" id="winner2">—</p>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner2">pandav2</p>
+                    <div class="sparkle" style="top: 30%; left: 40%; animation-delay: 0.2s;"></div>
+                    <div class="sparkle" style="top: 55%; left: 70%; animation-delay: 0.7s;"></div>
                 </div>
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
+                
+                <!-- 3rd -->
+                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center winner-card">
                     <div class="text-5xl mb-4">🥉</div>
                     <h3 class="font-bold text-2xl text-amber-800">3rd — $25</h3>
-                    <p class="text-zinc-400 mt-6" id="winner3">—</p>
+                    <p class="text-zinc-300 mt-6 font-medium text-xl" id="winner3">nope</p>
+                    <div class="sparkle" style="top: 35%; left: 25%; animation-delay: 0.5s;"></div>
+                    <div class="sparkle" style="top: 65%; left: 60%; animation-delay: 1s;"></div>
                 </div>
             </div>
         </div>
@@ -235,10 +268,9 @@
             } catch(e) {}
         }
 
-        // 14-day Countdown (Monday June 1, 2026 12 PM EST)
+        // Countdown (Monday June 1, 2026 12 PM EST)
         function startCountdown() {
             const el = document.getElementById('countdown');
-            
             function update() {
                 const target = new Date("2026-06-01T12:00:00-04:00");
                 let next = new Date(target);
@@ -254,33 +286,12 @@
                 const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
 
                 el.textContent = `Next payout in: ${days}d ${hours}h ${minutes}m`;
-
-                // When timer ends, move current top 3 to winners
-                if (diff < 60000) {
-                    moveCurrentTopToWinners();
-                }
             }
             update();
             setInterval(update, 30000);
         }
 
-        // Move current leaderboard top 3 to winners section
-        function moveCurrentTopToWinners() {
-            const rows = document.querySelectorAll('#leaderboard-content tr');
-            if (rows.length === 0) return;
-
-            const top3 = [];
-            for (let i = 0; i < Math.min(3, rows.length); i++) {
-                const playerName = rows[i].querySelector('td:nth-child(2)');
-                if (playerName) top3.push(playerName.textContent.trim());
-            }
-
-            if (top3[0]) document.getElementById('winner1').textContent = top3[0];
-            if (top3[1]) document.getElementById('winner2').textContent = top3[1];
-            if (top3[2]) document.getElementById('winner3').textContent = top3[2];
-        }
-
-        // Live Leaderboard using your real API
+        // Live Leaderboard
         async function fetchLeaderboard() {
             const content = document.getElementById('leaderboard-content');
             const statusEl = document.getElementById('last-updated');
@@ -344,7 +355,7 @@
             checkTwitchStatus();
             setInterval(checkTwitchStatus, 60000);
             fetchLeaderboard();
-            setInterval(fetchLeaderboard, 900000); // 15 minutes
+            setInterval(fetchLeaderboard, 900000);
             startCountdown();
         };
     </script>
