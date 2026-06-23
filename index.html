@@ -5,26 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>JaceAt1HP • 1HP</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- Tailwind CDN (with production warning suppressed via script) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Suppress Tailwind CDN production warning
+        window.tailwindConfig = {
+            content: [],
+            theme: { extend: {} }
+        };
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
         
         body { 
             font-family: 'Inter', system-ui, sans-serif; 
             background: #05070f;
-        }
-        
-        .liquid-glass {
-            background: rgba(15, 23, 42, 0.45);
-            backdrop-filter: blur(32px);
-            -webkit-backdrop-filter: blur(32px);
-            border: 1px solid rgba(100, 180, 255, 0.3);
-            box-shadow: 0 10px 50px rgba(59, 130, 246, 0.25);
+            position: relative;
+            overflow-x: hidden;
         }
 
-        .glow-blue {
-            box-shadow: 0 0 40px rgba(59, 130, 246, 0.5);
+        /* Global Blue Background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 20%, rgba(59, 130, 246, 0.28), transparent 65%);
+            pointer-events: none;
+            z-index: -1;
         }
+
+        .title-font { font-family: 'Space Grotesk', sans-serif; }
+
+        .liquid-glass {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(32px);
+            border: 1px solid rgba(100, 180, 255, 0.4);
+            box-shadow: 0 10px 50px rgba(59, 130, 246, 0.35);
+        }
+
+        .glow-blue { box-shadow: 0 0 45px rgba(59, 130, 246, 0.65); }
+
+        .hero-bg {
+            background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.6), transparent 70%);
+        }
+
+        .nav-link { position: relative; }
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, #60a5fa, #3b82f6);
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .nav-link:hover:after { width: 100%; }
+
+        .card-hover {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-16px) scale(1.02);
+            box-shadow: 0 35px 70px rgba(59, 130, 246, 0.45);
+        }
+
+        .btn-click:active { transform: scale(0.95) translateY(2px); }
+
+        .glass-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-button:after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 40%;
+            height: 200%;
+            background: linear-gradient(120deg, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-25deg);
+            transition: all 0.6s;
+            opacity: 0;
+        }
+        .glass-button:hover:after {
+            left: 120%;
+            opacity: 1;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 80ms; }
+        .reveal-delay-2 { transition-delay: 160ms; }
+        .reveal-delay-3 { transition-delay: 240ms; }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -34,7 +114,7 @@
         <div class="max-w-screen-2xl mx-auto px-6 py-3 flex items-center justify-center gap-x-3 text-red-400 font-medium text-sm">
             <div class="w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
             <span>JACEAT1HP IS LIVE RIGHT NOW!</span>
-            <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="ml-4 bg-red-600 hover:bg-red-500 text-white text-xs px-5 py-2 rounded-2xl flex items-center gap-x-2 font-semibold">
+            <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="ml-4 bg-red-600 hover:bg-red-500 text-white text-xs px-5 py-2 rounded-2xl flex items-center gap-x-2 font-semibold btn-click">
                 <i class="fab fa-twitch"></i> JOIN STREAM
             </a>
         </div>
@@ -44,62 +124,42 @@
     <nav class="fixed top-0 left-0 right-0 z-50 liquid-glass border-b border-white/10">
         <div class="max-w-screen-2xl mx-auto px-6 py-5 flex items-center justify-between">
             <div class="flex items-center gap-x-3">
-                <div class="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl flex items-center justify-center text-sm font-bold">1</div>
-                <span class="text-2xl font-semibold tracking-tighter">JaceAt1HP</span>
+                <div class="w-9 h-9 bg-gradient-to-br from-blue-500 via-cyan-400 to-blue-600 rounded-2xl flex items-center justify-center text-lg font-bold shadow-inner">1</div>
+                <span class="text-3xl font-semibold tracking-tighter title-font">JaceAt1HP</span>
             </div>
 
-            <div class="hidden md:flex items-center gap-x-8 text-sm font-medium">
-                <a href="#giveaways" class="nav-link text-zinc-400 hover:text-white">Giveaways</a>
-                <a href="#skinswap" class="nav-link text-zinc-400 hover:text-white">SkinSwap</a>
-                <a href="#funcs2" class="nav-link text-zinc-400 hover:text-white">FUNcs2</a>
-                <a href="#skinape" class="nav-link text-zinc-400 hover:text-white">SkinApe</a>
-                <a href="#leaderboard" class="nav-link text-zinc-400 hover:text-white">Top Spenders</a>
-                <a href="#winners" class="nav-link text-zinc-400 hover:text-white">Winners</a>
-                <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="nav-link text-zinc-400 hover:text-white">Twitch</a>
-                <a href="https://discord.gg/ZQAjjhEnTP" target="_blank" class="nav-link bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-2xl flex items-center gap-x-2">
+            <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                <a href="#giveaways" class="nav-link text-zinc-300 hover:text-white">Giveaways</a>
+                <a href="#skinswap" class="nav-link text-zinc-300 hover:text-white">SkinSwap</a>
+                <a href="#funcs2" class="nav-link text-zinc-300 hover:text-white">FUNcs2</a>
+                <a href="#skinape" class="nav-link text-zinc-300 hover:text-white">SkinApe</a>
+                <a href="#leaderboard" class="nav-link text-zinc-300 hover:text-white">Top Spenders</a>
+                <a href="#winners" class="nav-link text-zinc-300 hover:text-white">Winners</a>
+                <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="nav-link text-zinc-300 hover:text-white">Twitch</a>
+                <a href="https://discord.gg/ZQAjjhEnTP" target="_blank" class="nav-link bg-white/10 hover:bg-white/20 px-5 py-2.5 rounded-2xl flex items-center gap-x-2 transition-all">
                     <i class="fab fa-discord"></i> Discord
                 </a>
             </div>
 
-            <button id="mobile-menu-button" class="md:hidden text-3xl">
+            <button id="mobile-menu-button" class="md:hidden text-3xl transition-transform active:scale-90">
                 <i class="fas fa-bars"></i>
             </button>
         </div>
-
-        <div id="mobile-menu" class="hidden md:hidden liquid-glass border-t border-white/10 px-6 py-6">
-            <div class="flex flex-col gap-y-6 text-lg">
-                <a href="#giveaways" class="nav-link">Giveaways</a>
-                <a href="#skinswap" class="nav-link">SkinSwap</a>
-                <a href="#funcs2" class="nav-link">FUNcs2</a>
-                <a href="#skinape" class="nav-link">SkinApe</a>
-                <a href="#leaderboard" class="nav-link">Top Spenders</a>
-                <a href="#winners" class="nav-link">Winners</a>
-                <a href="https://www.twitch.tv/jaceat1hp" target="_blank">Twitch</a>
-                <a href="https://discord.gg/ZQAjjhEnTP" target="_blank">Discord</a>
-            </div>
-        </div>
     </nav>
-
-    <!-- PAUSED ALERT -->
-    <div class="bg-yellow-500/10 border border-yellow-500/30 py-3 text-center text-yellow-400 font-medium">
-        Giveaways are currently paused for the time being, sorry for the inconvenience love you all ❤️
-    </div>
 
     <!-- Hero -->
     <section class="min-h-screen hero-bg flex items-center relative pt-16">
         <div class="max-w-screen-2xl mx-auto px-6 pt-12">
             <div class="max-w-3xl mx-auto text-center">
-                <h1 class="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter leading-none mb-6">
+                <h1 class="text-7xl md:text-8xl lg:text-[5.5rem] font-bold tracking-tighter leading-none mb-6 title-font reveal" id="hero-title">
                     JACEAT<span class="text-blue-400">1HP</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-zinc-300 mb-12">Daily Drops • Bi-Weekly Cash Rewards</p>
+                <p class="text-2xl text-zinc-300 mb-12 reveal reveal-delay-1">Daily Drops • Bi-Weekly Cash Rewards</p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" class="flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/90 font-semibold text-lg px-10 py-6 rounded-3xl glow-blue">
+                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" 
+                       class="glass-button flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/95 font-semibold text-xl px-12 py-7 rounded-3xl glow-blue btn-click reveal reveal-delay-2">
                         <i class="fab fa-twitch"></i> WATCH LIVE
-                    </a>
-                    <a href="https://roulo.gg/?r=1HP" target="_blank" class="flex items-center justify-center gap-x-3 border border-blue-400/50 hover:border-blue-400 font-medium text-lg px-10 py-6 rounded-3xl">
-                        JOIN ROULO.GG • CODE <span class="text-blue-400 font-bold">1HP</span>
                     </a>
                 </div>
             </div>
@@ -107,47 +167,45 @@
     </section>
 
     <!-- Giveaways -->
-    <section id="giveaways" class="py-20 md:py-28 bg-zinc-950">
+    <section id="giveaways" class="py-24 md:py-32 bg-zinc-950/80 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-12 md:mb-16">
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Giveaways Every Stream</h2>
+            <div class="text-center mb-16">
+                <h2 class="section-title text-5xl md:text-6xl font-semibold tracking-tight reveal">Giveaways Every Stream</h2>
             </div>
-            <div class="grid md:grid-cols-2 gap-6 md:gap-8 max-w-5xl mx-auto">
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 md:p-10 card-hover">
-                    <span class="px-4 py-1.5 bg-emerald-500/10 text-emerald-400 text-xs font-bold rounded-2xl">EVERY STREAM</span>
-                    <h3 class="text-3xl md:text-4xl font-semibold mt-6">Counter-Strike Drops</h3>
-                    <p class="text-zinc-400 mt-6">Weapon skins, cases, gloves and more dropped live on stream.</p>
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-1">
+                    <span class="px-5 py-2 bg-emerald-500/10 text-emerald-400 text-sm font-bold rounded-2xl">EVERY STREAM</span>
+                    <h3 class="text-4xl font-semibold mt-8">Counter-Strike Drops</h3>
+                    <p class="text-zinc-400 mt-6 text-lg">Weapon skins, cases, gloves and more dropped live on stream.</p>
                 </div>
                 
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 md:p-10 card-hover">
-                    <span class="px-4 py-1.5 bg-purple-500/10 text-purple-400 text-xs font-bold rounded-2xl">BI-WEEKLY</span>
-                    <h3 class="text-3xl md:text-4xl font-semibold mt-6">Cash Rewards</h3>
-                    <p class="text-zinc-400 text-lg mt-6">Top users with code <strong>1HP</strong> win <strong>$150 every two weeks</strong></p>
-                    <p class="text-emerald-400 mt-3">1st $75 • 2nd $50 • 3rd $25</p>
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-2">
+                    <span class="px-5 py-2 bg-purple-500/10 text-purple-400 text-sm font-bold rounded-2xl">BI-WEEKLY</span>
+                    <h3 class="text-4xl font-semibold mt-8">Cash Rewards</h3>
+                    <p class="text-zinc-400 text-xl mt-6">Top users with code <strong>1HP</strong> win <strong>$150 every two weeks</strong></p>
+                    <p class="text-emerald-400 mt-4 text-lg">1st $75 • 2nd $50 • 3rd $25</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SkinSwap -->
-    <section id="skinswap" class="py-20 md:py-28 bg-zinc-900">
+    <section id="skinswap" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-8 md:p-16 card-hover">
+            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-12 md:p-16 card-hover reveal reveal-delay-1">
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
                     <div class="lg:w-1/2">
                         <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6">Turn Old Boring Skins into New Cool Ones</h2>
-                        <p class="mt-6 text-zinc-400 text-lg">Seamlessly upgrade your inventory with fresh, flashy skins in seconds.</p>
-                        <a href="https://skinswap.com/r/1hp" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-lg px-10 py-6 rounded-3xl">
+                        <h2 class="text-5xl font-semibold tracking-tight mt-8">Turn Old Boring Skins into New Cool Ones</h2>
+                        <p class="mt-8 text-zinc-300 text-xl">Seamlessly upgrade your inventory with fresh, flashy skins in seconds.</p>
+                        <a href="https://skinswap.com/r/1hp" target="_blank" 
+                           class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                             <i class="fas fa-exchange-alt"></i> UPGRADE NOW
                         </a>
-                        <div class="mt-8 text-emerald-400 text-sm flex items-center gap-x-3">
-                            <i class="fas fa-gift"></i> Use code <span class="text-white font-semibold">1HP</span> — Get a FREE skin up to $50
-                        </div>
                     </div>
-                    <div class="lg:w-1/2 text-center">
-                        <div class="text-8xl mb-6">💎</div>
-                        <h3 class="text-3xl font-semibold">Instant Skin Upgrades</h3>
+                    <div class="lg:w-1/2 text-center reveal reveal-delay-3">
+                        <div class="text-[8rem] mb-6 opacity-90">💎</div>
+                        <h3 class="text-4xl font-semibold">Instant Skin Upgrades</h3>
                     </div>
                 </div>
             </div>
@@ -155,21 +213,22 @@
     </section>
 
     <!-- FUNcs2 -->
-    <section id="funcs2" class="py-20 md:py-28 bg-zinc-950">
+    <section id="funcs2" class="py-24 md:py-32 bg-zinc-950/80 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-8 md:p-16 card-hover">
+            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-12 md:p-16 card-hover reveal reveal-delay-1">
                 <div class="flex flex-col lg:flex-row gap-12 items-center">
                     <div class="lg:w-1/2">
-                        <span class="px-5 py-2 bg-pink-500/10 text-pink-400 text-xs font-bold rounded-2xl">HOT BONUS</span>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tight mt-6">FREE $2 + 19% Deposit Bonus</h2>
-                        <p class="mt-6 text-zinc-400 text-lg">Sign up and deposit using code <strong>1HP</strong> to claim this insane welcome offer!</p>
-                        <a href="https://www.funcs2.com/r/1HP" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold text-lg px-10 py-6 rounded-3xl">
+                        <span class="px-5 py-2 bg-pink-500/10 text-pink-400 text-sm font-bold rounded-2xl">HOT BONUS</span>
+                        <h2 class="text-5xl font-semibold tracking-tight mt-8">FREE $2 + 19% Deposit Bonus</h2>
+                        <p class="mt-8 text-zinc-300 text-xl">Sign up and deposit using code <strong>1HP</strong> to claim this insane welcome offer!</p>
+                        <a href="https://www.funcs2.com/r/1HP" target="_blank" 
+                           class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                             <i class="fas fa-gift"></i> CLAIM FREE $2 + 19% BONUS
                         </a>
                     </div>
-                    <div class="lg:w-1/2 text-center">
-                        <div class="text-8xl mb-6">🎰</div>
-                        <h3 class="text-3xl font-semibold">Don't Miss This Deal</h3>
+                    <div class="lg:w-1/2 text-center reveal reveal-delay-3">
+                        <div class="text-[8rem] mb-6">🎰</div>
+                        <h3 class="text-4xl font-semibold">Don't Miss This Deal</h3>
                     </div>
                 </div>
             </div>
@@ -177,73 +236,71 @@
     </section>
 
     <!-- SkinApe -->
-    <section id="skinape" class="py-20 md:py-28 bg-zinc-900">
+    <section id="skinape" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-8 md:p-16 card-hover">
-                <div class="flex flex-col lg:flex-row gap-12 items-center">
-                    <div class="lg:w-1/2">
-                        <span class="px-5 py-2 bg-violet-500/10 text-violet-400 text-xs font-bold rounded-2xl">NEW WAY TO EARN</span>
-                        <h2 class="text-4xl md:text-5xl font-semibold tracking-tighter mt-6">Hey Chat!!! Want to win some skins for free??</h2>
-                        <p class="mt-6 text-zinc-400 text-lg">How about playing games to win skins?? SKIN APEEE!!!!! Lets you play games, take quizzes, or complete small tasks to win credits where you can spend on CS cases OR directly purchase CS skins for FREE!!! No steam login needed, and no scam offers that take forever to complete! Start earning while you play with SkinApe TODAY!!</p>
-                        <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank" class="mt-10 inline-flex items-center gap-x-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold text-lg px-10 py-6 rounded-3xl">
-                            <i class="fas fa-gamepad"></i> START EARNING SKINS NOW
-                        </a>
-                        <div class="mt-8 text-emerald-400 text-sm flex items-center gap-x-3">
-                            <i class="fas fa-gift"></i> Use code <span class="text-white font-semibold">59O0VNLQ</span> to get 50 free coins to start!
-                        </div>
-                    </div>
-                    <div class="lg:w-1/2 text-center">
-                        <div class="text-8xl mb-6">🦍</div>
-                        <h3 class="text-3xl font-semibold">Play Games → Win Skins</h3>
-                    </div>
+            <div class="max-w-4xl mx-auto liquid-glass border border-white/10 rounded-3xl p-10 md:p-14 card-hover reveal reveal-delay-1">
+                <div class="text-center">
+                    <span class="px-5 py-2 bg-violet-500/10 text-violet-400 text-sm font-bold rounded-2xl">NEW WAY TO EARN</span>
+                    <h2 class="text-5xl font-semibold tracking-tight mt-8">Win FREE CS2 Skins by Playing Games!</h2>
+                    <p class="mt-8 text-zinc-300 text-xl">Play games, complete fun tasks, or take quick quizzes to earn credits. Use them to open cases or buy CS2 skins directly — no Steam login needed and no endless grinds!</p>
+                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank" 
+                       class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
+                        <i class="fas fa-gamepad"></i> START EARNING SKINS FREE
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Leaderboard -->
-    <section id="leaderboard" class="py-20 md:py-28 bg-zinc-950">
+    <section id="leaderboard" class="py-24 md:py-32 bg-zinc-950/80 backdrop-blur-sm">
+        <div class="max-w-4xl mx-auto mb-12 px-6">
+            <div class="bg-yellow-500/10 border border-yellow-500/30 py-5 px-8 text-center text-yellow-400 font-medium rounded-3xl reveal">
+                Giveaways are currently paused. There is no bi-weekly reward until further notice. Sorry for the inconvenience, love you all ❤️
+            </div>
+        </div>
+
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-10">
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Top 1HP Spenders • Roulo.gg</h2>
-                <p class="text-zinc-400 mt-3" id="last-updated">Loading...</p>
-                <p id="countdown" class="text-emerald-400 font-medium mt-2"></p>
+            <div class="text-center mb-12">
+                <h2 class="section-title text-5xl md:text-6xl font-semibold tracking-tight reveal">Top 1HP Spenders • Roulo.gg</h2>
+                <p class="text-zinc-400 mt-4 reveal reveal-delay-1" id="last-updated">Loading live data...</p>
+                <p id="countdown" class="text-emerald-400 font-medium mt-3 text-lg reveal reveal-delay-2"></p>
             </div>
             
-            <div class="max-w-4xl mx-auto liquid-glass border border-white/10 rounded-3xl overflow-hidden">
-                <div id="leaderboard-content" class="min-h-[420px] p-6 md:p-8"></div>
+            <div class="max-w-4xl mx-auto liquid-glass border border-white/10 rounded-3xl overflow-hidden reveal reveal-delay-3">
+                <div id="leaderboard-content" class="min-h-[420px] p-8"></div>
             </div>
         </div>
     </section>
 
     <!-- Recent Winners -->
-    <section id="winners" class="py-20 md:py-28 bg-zinc-900">
+    <section id="winners" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-semibold tracking-tight">Recent Bi-Weekly Winners</h2>
+            <div class="text-center mb-16">
+                <h2 class="section-title text-5xl md:text-6xl font-semibold tracking-tight reveal">Recent Bi-Weekly Winners</h2>
             </div>
-            <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-6">
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
-                    <div class="text-5xl mb-4">🥇</div>
-                    <h3 class="font-bold text-2xl text-amber-400">1st — $75</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl">Telephone</p>
+            <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-8">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-1">
+                    <div class="text-6xl mb-6">🥇</div>
+                    <h3 class="font-bold text-3xl text-amber-400">1st — $75</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">Telephone</p>
                 </div>
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
-                    <div class="text-5xl mb-4">🥈</div>
-                    <h3 class="font-bold text-2xl text-slate-300">2nd — $50</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl">pandav2</p>
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-2">
+                    <div class="text-6xl mb-6">🥈</div>
+                    <h3 class="font-bold text-3xl text-slate-300">2nd — $50</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">pandav2</p>
                 </div>
-                <div class="liquid-glass border border-white/10 rounded-3xl p-8 text-center">
-                    <div class="text-5xl mb-4">🥉</div>
-                    <h3 class="font-bold text-2xl text-amber-800">3rd — $25</h3>
-                    <p class="text-zinc-300 mt-6 font-medium text-xl">nope</p>
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-3">
+                    <div class="text-6xl mb-6">🥉</div>
+                    <h3 class="font-bold text-3xl text-amber-800">3rd — $25</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">nope</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="bg-black py-12 text-center text-zinc-500 text-sm">
-        <p>JaceAt1HP • Use code <span class="text-blue-400">1HP</span> on Roulo.gg, SkinSwap & FUNcs2</p>
+    <footer class="bg-black/80 backdrop-blur-md py-16 text-center text-zinc-500 text-sm">
+        <p>JaceAt1HP • Use code <span class="text-blue-400">1HP</span> on Roulo.gg, SkinSwap &amp; FUNcs2</p>
     </footer>
 
     <script>
@@ -270,10 +327,7 @@
                 const target = new Date("2026-06-01T12:00:00-04:00");
                 let next = new Date(target);
                 const now = new Date();
-                
-                while (next < now) {
-                    next.setDate(next.getDate() + 14);
-                }
+                while (next < now) next.setDate(next.getDate() + 14);
 
                 const diff = next - now;
                 const days = Math.floor(diff / (1000*60*60*24));
@@ -320,19 +374,19 @@
                     .filter(a => parseFloat(a.wagered_amount || 0) > 0)
                     .sort((a, b) => parseFloat(b.wagered_amount) - parseFloat(a.wagered_amount));
 
-                let html = `<div class="overflow-x-auto"><table class="w-full"><thead class="bg-white/5"><tr><th class="pl-6 py-5 text-left">Rank</th><th class="py-5 text-left">Player</th><th class="py-5 text-right pr-8">Wagered</th></tr></thead><tbody>`;
+                let html = `<div class="overflow-x-auto"><table class="w-full"><thead class="bg-white/5"><tr><th class="pl-8 py-6 text-left">Rank</th><th class="py-6 text-left">Player</th><th class="py-6 text-right pr-10">Wagered</th></tr></thead><tbody>`;
 
                 sorted.slice(0, 15).forEach((player, i) => {
                     const amount = parseFloat(player.wagered_amount).toLocaleString('en-US');
                     let rankHTML = `#${i+1}`;
-                    if (i === 0) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-yellow-400 text-black">🥇 1st</span>`;
-                    else if (i === 1) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-gray-300 text-black">🥈 2nd</span>`;
-                    else if (i === 2) rankHTML = `<span class="px-5 py-2 rounded-2xl font-bold bg-amber-700 text-white">🥉 3rd</span>`;
+                    if (i === 0) rankHTML = `<span class="px-6 py-2.5 rounded-2xl font-bold bg-yellow-400 text-black">🥇 1st</span>`;
+                    else if (i === 1) rankHTML = `<span class="px-6 py-2.5 rounded-2xl font-bold bg-gray-300 text-black">🥈 2nd</span>`;
+                    else if (i === 2) rankHTML = `<span class="px-6 py-2.5 rounded-2xl font-bold bg-amber-700 text-white">🥉 3rd</span>`;
 
-                    html += `<tr class="border-t border-white/10 hover:bg-white/5">
-                        <td class="pl-6 py-5">${rankHTML}</td>
-                        <td class="py-5 font-medium">${player.username}</td>
-                        <td class="py-5 text-right pr-8 font-mono">$${amount}</td>
+                    html += `<tr class="border-t border-white/10 hover:bg-white/5 transition-colors">
+                        <td class="pl-8 py-6">${rankHTML}</td>
+                        <td class="py-6 font-medium">${player.username}</td>
+                        <td class="py-6 text-right pr-10 font-mono">$${amount}</td>
                     </tr>`;
                 });
 
@@ -341,8 +395,23 @@
                 statusEl.textContent = `Updated just now`;
 
             } catch (err) {
-                content.innerHTML = `<div class="flex flex-col items-center justify-center h-96 text-center"><p class="text-red-400">Failed to load leaderboard</p><button onclick="fetchLeaderboard()" class="mt-6 bg-white/10 hover:bg-white/20 px-6 py-3 rounded-2xl">Try Again</button></div>`;
+                content.innerHTML = `<div class="flex flex-col items-center justify-center h-96 text-center"><p class="text-red-400">Failed to load leaderboard</p><button onclick="fetchLeaderboard()" class="mt-6 bg-white/10 hover:bg-white/20 px-8 py-4 rounded-2xl btn-click">Try Again</button></div>`;
             }
+        }
+
+        // Smooth Reveal
+        function initScrollReveal() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 80);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
         window.onload = () => {
@@ -351,6 +420,7 @@
             fetchLeaderboard();
             setInterval(fetchLeaderboard, 900000);
             startCountdown();
+            initScrollReveal();
         };
     </script>
 </body>
