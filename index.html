@@ -11,14 +11,13 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-        
-        body { 
-            font-family: 'Inter', system-ui, sans-serif; 
+       
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
             background: #05070f;
             position: relative;
             overflow-x: hidden;
         }
-
         body::before {
             content: '';
             position: fixed;
@@ -27,31 +26,17 @@
             pointer-events: none;
             z-index: -1;
         }
-
         .title-font { font-family: 'Space Grotesk', sans-serif; }
-
         .liquid-glass {
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(32px);
             border: 1px solid rgba(100, 180, 255, 0.4);
             box-shadow: 0 10px 50px rgba(59, 130, 246, 0.35);
         }
-
         .glow-blue { box-shadow: 0 0 45px rgba(59, 130, 246, 0.65); }
-
         .hero-bg {
             background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.6), transparent 70%);
         }
-
-        /* PIN Modal */
-        #pin-modal {
-            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.75) translateY(50px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
         .nav-link { position: relative; }
         .nav-link:after {
             content: '';
@@ -64,7 +49,6 @@
             transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .nav-link:hover:after { width: 100%; }
-
         .card-hover {
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -72,9 +56,7 @@
             transform: translateY(-16px) scale(1.02);
             box-shadow: 0 35px 70px rgba(59, 130, 246, 0.45);
         }
-
         .btn-click:active { transform: scale(0.95) translateY(2px); }
-
         .glass-button {
             position: relative;
             overflow: hidden;
@@ -91,8 +73,10 @@
             transition: all 0.6s;
             opacity: 0;
         }
-        .glass-button:hover:after { left: 120%; opacity: 1; }
-
+        .glass-button:hover:after {
+            left: 120%;
+            opacity: 1;
+        }
         .reveal {
             opacity: 0;
             transform: translateY(60px);
@@ -102,6 +86,15 @@
         .reveal-delay-1 { transition-delay: 80ms; }
         .reveal-delay-2 { transition-delay: 160ms; }
         .reveal-delay-3 { transition-delay: 240ms; }
+
+        /* PIN Modal */
+        #pin-modal {
+            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPop {
+            from { opacity: 0; transform: scale(0.75) translateY(50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -176,9 +169,9 @@
                     JACEAT<span class="text-blue-400">1HP</span>
                 </h1>
                 <p class="text-2xl text-zinc-300 mb-12 reveal reveal-delay-1">Daily Drops • Bi-Weekly Cash Rewards</p>
-                
+               
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" 
+                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank"
                        class="glass-button flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/95 font-semibold text-xl px-12 py-7 rounded-3xl glow-blue btn-click reveal reveal-delay-2">
                         <i class="fab fa-twitch"></i> WATCH LIVE
                     </a>
@@ -199,7 +192,7 @@
                     <h3 class="text-4xl font-semibold mt-8">Counter-Strike Drops</h3>
                     <p class="text-zinc-400 mt-6 text-lg">Weapon skins, cases, gloves and more dropped live on stream.</p>
                 </div>
-                
+               
                 <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-2">
                     <span class="px-5 py-2 bg-purple-500/10 text-purple-400 text-sm font-bold rounded-2xl">BI-WEEKLY</span>
                     <h3 class="text-4xl font-semibold mt-8">Cash Rewards</h3>
@@ -219,7 +212,7 @@
                         <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
                         <h2 class="text-5xl font-semibold tracking-tight mt-8">Turn Old Boring Skins into New Cool Ones</h2>
                         <p class="mt-8 text-zinc-300 text-xl">Seamlessly upgrade your inventory with fresh, flashy skins in seconds.</p>
-                        <a href="https://skinswap.com/r/1hp" target="_blank" 
+                        <a href="https://skinswap.com/r/1hp" target="_blank"
                            class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                             <i class="fas fa-exchange-alt"></i> UPGRADE NOW
                         </a>
@@ -244,7 +237,7 @@
                     <span class="px-5 py-2 bg-violet-500/10 text-violet-400 text-sm font-bold rounded-2xl">NEW WAY TO EARN</span>
                     <h2 class="text-5xl font-semibold tracking-tight mt-8">Win FREE CS2 Skins by Playing Games!</h2>
                     <p class="mt-8 text-zinc-300 text-xl">Play games, complete fun tasks, or take quick quizzes to earn credits. Use them to open cases or buy CS2 skins directly — no Steam login needed and no endless grinds!</p>
-                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank" 
+                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank"
                        class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                         <i class="fas fa-gamepad"></i> START EARNING SKINS FREE
                     </a>
@@ -306,7 +299,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // PIN Modal
+        // PIN Modal Functions
         function openPinModal() {
             document.getElementById('pin-modal').classList.remove('hidden');
             document.getElementById('pin-input').focus();
@@ -326,23 +319,40 @@
             } else {
                 const input = document.getElementById('pin-input');
                 input.classList.add('!border-red-500', 'animate-pulse');
-                setTimeout(() => input.classList.remove('!border-red-500', 'animate-pulse'), 1000);
+                setTimeout(() => {
+                    input.classList.remove('!border-red-500', 'animate-pulse');
+                }, 1000);
             }
         }
 
-        // Scroll Reveal
+        // Twitch Live
+        async function checkTwitchStatus() {
+            try {
+                const res = await fetch('https://api.twitch.tv/helix/streams?user_login=jaceat1hp', {
+                    headers: { 'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko' }
+                });
+                const data = await res.json();
+                document.getElementById('live-bar').classList.toggle('hidden', !(data.data && data.data.length > 0));
+            } catch(e) {}
+        }
+
+        // Smooth Reveal
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => entry.target.classList.add('visible'), index * 80);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 80);
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
         window.onload = () => {
+            checkTwitchStatus();
+            setInterval(checkTwitchStatus, 60000);
             initScrollReveal();
         };
     </script>
