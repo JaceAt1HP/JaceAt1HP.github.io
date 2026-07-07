@@ -299,7 +299,7 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // PIN Modal Functions
+        // PIN Modal
         function openPinModal() {
             document.getElementById('pin-modal').classList.remove('hidden');
             document.getElementById('pin-input').focus();
@@ -319,40 +319,23 @@
             } else {
                 const input = document.getElementById('pin-input');
                 input.classList.add('!border-red-500', 'animate-pulse');
-                setTimeout(() => {
-                    input.classList.remove('!border-red-500', 'animate-pulse');
-                }, 1000);
+                setTimeout(() => input.classList.remove('!border-red-500', 'animate-pulse'), 1000);
             }
         }
 
-        // Twitch Live
-        async function checkTwitchStatus() {
-            try {
-                const res = await fetch('https://api.twitch.tv/helix/streams?user_login=jaceat1hp', {
-                    headers: { 'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko' }
-                });
-                const data = await res.json();
-                document.getElementById('live-bar').classList.toggle('hidden', !(data.data && data.data.length > 0));
-            } catch(e) {}
-        }
-
-        // Smooth Reveal
+        // Scroll Reveal
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.classList.add('visible');
-                        }, index * 80);
+                        setTimeout(() => entry.target.classList.add('visible'), index * 80);
                     }
                 });
-            }, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
+            }, { threshold: 0.15 });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
         window.onload = () => {
-            checkTwitchStatus();
-            setInterval(checkTwitchStatus, 60000);
             initScrollReveal();
         };
     </script>
