@@ -11,13 +11,14 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
-       
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
+        
+        body { 
+            font-family: 'Inter', system-ui, sans-serif; 
             background: #05070f;
             position: relative;
             overflow-x: hidden;
         }
+
         body::before {
             content: '';
             position: fixed;
@@ -26,17 +27,22 @@
             pointer-events: none;
             z-index: -1;
         }
+
         .title-font { font-family: 'Space Grotesk', sans-serif; }
+
         .liquid-glass {
             background: rgba(15, 23, 42, 0.65);
             backdrop-filter: blur(32px);
             border: 1px solid rgba(100, 180, 255, 0.4);
             box-shadow: 0 10px 50px rgba(59, 130, 246, 0.35);
         }
+
         .glow-blue { box-shadow: 0 0 45px rgba(59, 130, 246, 0.65); }
+
         .hero-bg {
             background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.6), transparent 70%);
         }
+
         .nav-link { position: relative; }
         .nav-link:after {
             content: '';
@@ -49,6 +55,7 @@
             transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .nav-link:hover:after { width: 100%; }
+
         .card-hover {
             transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -56,7 +63,9 @@
             transform: translateY(-16px) scale(1.02);
             box-shadow: 0 35px 70px rgba(59, 130, 246, 0.45);
         }
+
         .btn-click:active { transform: scale(0.95) translateY(2px); }
+
         .glass-button {
             position: relative;
             overflow: hidden;
@@ -77,6 +86,7 @@
             left: 120%;
             opacity: 1;
         }
+
         .reveal {
             opacity: 0;
             transform: translateY(60px);
@@ -86,14 +96,6 @@
         .reveal-delay-1 { transition-delay: 80ms; }
         .reveal-delay-2 { transition-delay: 160ms; }
         .reveal-delay-3 { transition-delay: 240ms; }
-
-        #pin-modal {
-            animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.75) translateY(50px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -128,36 +130,11 @@
                 </a>
             </div>
 
-            <button onclick="openPinModal()" class="text-2xl p-3 hover:bg-white/10 rounded-2xl transition-all active:scale-90">
-                <i class="fas fa-cog"></i>
+            <button id="mobile-menu-button" class="md:hidden text-3xl transition-transform active:scale-90">
+                <i class="fas fa-bars"></i>
             </button>
         </div>
     </nav>
-
-    <!-- PIN Modal -->
-    <div id="pin-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-2xl z-[200] flex items-center justify-center">
-        <div class="liquid-glass rounded-3xl p-10 w-full max-w-md mx-4 text-center">
-            <div class="mb-8">
-                <i class="fas fa-lock text-7xl text-blue-400 mb-6"></i>
-                <h3 class="text-3xl font-semibold">Admin Access</h3>
-                <p class="text-zinc-400 mt-2">Enter 4-digit PIN</p>
-            </div>
-            
-            <input id="pin-input" 
-                   type="password" 
-                   maxlength="4" 
-                   class="w-full bg-zinc-900 border border-white/20 text-center text-5xl tracking-[8px] py-8 rounded-2xl focus:outline-none focus:border-blue-400 mb-8"
-                   placeholder="••••"
-                   onkeypress="if(event.key === 'Enter') checkPin()">
-            
-            <button onclick="checkPin()" 
-                    class="glass-button w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-semibold text-lg">
-                UNLOCK ADMIN VIEW
-            </button>
-            
-            <button onclick="closePinModal()" class="mt-6 text-zinc-400 hover:text-white">Cancel</button>
-        </div>
-    </div>
 
     <!-- Hero -->
     <section class="min-h-screen hero-bg flex items-center relative pt-16">
@@ -167,9 +144,9 @@
                     JACEAT<span class="text-blue-400">1HP</span>
                 </h1>
                 <p class="text-2xl text-zinc-300 mb-12 reveal reveal-delay-1">Daily Drops • Bi-Weekly Cash Rewards</p>
-               
+                
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank"
+                    <a href="https://www.twitch.tv/jaceat1hp" target="_blank" 
                        class="glass-button flex items-center justify-center gap-x-3 bg-white text-zinc-900 hover:bg-white/95 font-semibold text-xl px-12 py-7 rounded-3xl glow-blue btn-click reveal reveal-delay-2">
                         <i class="fab fa-twitch"></i> WATCH LIVE
                     </a>
@@ -190,7 +167,7 @@
                     <h3 class="text-4xl font-semibold mt-8">Counter-Strike Drops</h3>
                     <p class="text-zinc-400 mt-6 text-lg">Weapon skins, cases, gloves and more dropped live on stream.</p>
                 </div>
-               
+                
                 <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-2">
                     <span class="px-5 py-2 bg-purple-500/10 text-purple-400 text-sm font-bold rounded-2xl">BI-WEEKLY</span>
                     <h3 class="text-4xl font-semibold mt-8">Cash Rewards</h3>
@@ -210,7 +187,7 @@
                         <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
                         <h2 class="text-5xl font-semibold tracking-tight mt-8">Turn Old Boring Skins into New Cool Ones</h2>
                         <p class="mt-8 text-zinc-300 text-xl">Seamlessly upgrade your inventory with fresh, flashy skins in seconds.</p>
-                        <a href="https://skinswap.com/r/1hp" target="_blank"
+                        <a href="https://skinswap.com/r/1hp" target="_blank" 
                            class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                             <i class="fas fa-exchange-alt"></i> UPGRADE NOW
                         </a>
@@ -235,7 +212,7 @@
                     <span class="px-5 py-2 bg-violet-500/10 text-violet-400 text-sm font-bold rounded-2xl">NEW WAY TO EARN</span>
                     <h2 class="text-5xl font-semibold tracking-tight mt-8">Win FREE CS2 Skins by Playing Games!</h2>
                     <p class="mt-8 text-zinc-300 text-xl">Play games, complete fun tasks, or take quick quizzes to earn credits. Use them to open cases or buy CS2 skins directly — no Steam login needed and no endless grinds!</p>
-                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank"
+                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank" 
                        class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
                         <i class="fas fa-gamepad"></i> START EARNING SKINS FREE
                     </a>
@@ -273,20 +250,6 @@
         </div>
     </section>
 
-    <!-- ADMIN VIEW -->
-    <section id="admin-view" class="hidden py-24 bg-zinc-950">
-        <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-6xl font-bold tracking-tight text-blue-400">🔐 Admin View</h2>
-                <p class="text-zinc-400 mt-4">Private Dashboard</p>
-            </div>
-            <div class="max-w-2xl mx-auto liquid-glass rounded-3xl p-16 text-center">
-                <p class="text-3xl mb-6">Welcome back, Jace.</p>
-                <p class="text-xl text-zinc-300">This area is for admin tools and private controls.</p>
-            </div>
-        </div>
-    </section>
-
     <footer class="bg-black/80 backdrop-blur-md py-16 text-center text-zinc-500 text-sm">
         <p>JaceAt1HP • Powered by amazing partners</p>
     </footer>
@@ -297,43 +260,54 @@
             document.getElementById('mobile-menu').classList.toggle('hidden');
         });
 
-        // PIN Modal
-        function openPinModal() {
-            document.getElementById('pin-modal').classList.remove('hidden');
-            document.getElementById('pin-input').focus();
+        // Twitch Live
+        async function checkTwitchStatus() {
+            try {
+                const res = await fetch('https://api.twitch.tv/helix/streams?user_login=jaceat1hp', {
+                    headers: { 'Client-ID': 'kimne78kx3ncx6brgo4mv6wki5h1ko' }
+                });
+                const data = await res.json();
+                document.getElementById('live-bar').classList.toggle('hidden', !(data.data && data.data.length > 0));
+            } catch(e) {}
         }
 
-        function closePinModal() {
-            document.getElementById('pin-modal').classList.add('hidden');
-            document.getElementById('pin-input').value = '';
-        }
-
-        function checkPin() {
-            const pin = document.getElementById('pin-input').value.trim();
-            if (pin === "3292") {
-                closePinModal();
-                document.getElementById('admin-view').classList.remove('hidden');
-                document.getElementById('admin-view').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                const input = document.getElementById('pin-input');
-                input.classList.add('!border-red-500', 'animate-pulse');
-                setTimeout(() => input.classList.remove('!border-red-500', 'animate-pulse'), 1000);
+        // Countdown (kept for future cash rewards)
+        function startCountdown() {
+            const el = document.getElementById('countdown');
+            if (!el) return;
+            function update() {
+                const target = new Date("2026-06-01T12:00:00-04:00");
+                let next = new Date(target);
+                const now = new Date();
+                while (next < now) next.setDate(next.getDate() + 14);
+                const diff = next - now;
+                const days = Math.floor(diff / (1000*60*60*24));
+                const hours = Math.floor((diff % (1000*60*60*24)) / (1000*60*60));
+                const minutes = Math.floor((diff % (1000*60*60)) / (1000*60));
+                el.textContent = `Next payout in: ${days}d ${hours}h ${minutes}m`;
             }
+            update();
+            setInterval(update, 60000);
         }
 
-        // Scroll Reveal
+        // Smooth Reveal
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => entry.target.classList.add('visible'), index * 80);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 80);
                     }
                 });
-            }, { threshold: 0.15 });
+            }, { threshold: 0.15, rootMargin: "0px 0px -80px 0px" });
+
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
         window.onload = () => {
+            checkTwitchStatus();
+            setInterval(checkTwitchStatus, 60000);
             initScrollReveal();
         };
     </script>
