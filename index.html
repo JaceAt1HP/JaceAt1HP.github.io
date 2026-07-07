@@ -43,13 +43,12 @@
             background: radial-gradient(circle at 50% 30%, rgba(59, 130, 246, 0.6), transparent 70%);
         }
 
-        /* Modal */
+        /* Settings Modal */
         #pin-modal {
             animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
         @keyframes modalPop {
-            from { opacity: 0; transform: scale(0.7) translateY(40px); }
+            from { opacity: 0; transform: scale(0.75) translateY(50px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
@@ -66,7 +65,9 @@
         }
         .nav-link:hover:after { width: 100%; }
 
-        .card-hover { transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .card-hover {
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
         .card-hover:hover {
             transform: translateY(-16px) scale(1.02);
             box-shadow: 0 35px 70px rgba(59, 130, 246, 0.45);
@@ -98,6 +99,9 @@
             transition: all 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 80ms; }
+        .reveal-delay-2 { transition-delay: 160ms; }
+        .reveal-delay-3 { transition-delay: 240ms; }
     </style>
 </head>
 <body class="bg-[#05070f] text-white overflow-x-hidden">
@@ -140,30 +144,27 @@
     </nav>
 
     <!-- PIN Modal -->
-    <div id="pin-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[200] flex items-center justify-center">
+    <div id="pin-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-2xl z-[200] flex items-center justify-center">
         <div class="liquid-glass rounded-3xl p-10 w-full max-w-md mx-4 text-center">
             <div class="mb-8">
-                <i class="fas fa-lock text-6xl text-blue-400 mb-4"></i>
-                <h3 class="text-2xl font-semibold">Admin Access</h3>
+                <i class="fas fa-lock text-7xl text-blue-400 mb-6"></i>
+                <h3 class="text-3xl font-semibold">Admin Access</h3>
                 <p class="text-zinc-400 mt-2">Enter 4-digit PIN</p>
             </div>
             
             <input id="pin-input" 
                    type="password" 
                    maxlength="4" 
-                   class="w-full bg-zinc-900 border border-white/20 text-center text-4xl tracking-widest py-6 rounded-2xl focus:outline-none focus:border-blue-400 mb-6"
+                   class="w-full bg-zinc-900 border border-white/20 text-center text-5xl tracking-[8px] py-8 rounded-2xl focus:outline-none focus:border-blue-400 mb-8"
                    placeholder="••••"
                    onkeypress="if(event.key === 'Enter') checkPin()">
             
             <button onclick="checkPin()" 
-                    class="glass-button w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-semibold text-lg">
-                UNLOCK
+                    class="glass-button w-full bg-blue-600 hover:bg-blue-500 py-5 rounded-2xl font-semibold text-lg">
+                UNLOCK ADMIN VIEW
             </button>
             
-            <button onclick="closePinModal()" 
-                    class="mt-4 text-zinc-400 hover:text-white text-sm">
-                Cancel
-            </button>
+            <button onclick="closePinModal()" class="mt-6 text-zinc-400 hover:text-white">Cancel</button>
         </div>
     </div>
 
@@ -186,24 +187,109 @@
         </div>
     </section>
 
-    <!-- Giveaways, SkinSwap, SkinApe, Winners sections remain the same -->
-
-    <!-- ADMIN VIEW (Hidden by default) -->
-    <section id="admin-view" class="hidden py-24 bg-zinc-950">
+    <!-- Giveaways -->
+    <section id="giveaways" class="py-24 md:py-32 bg-zinc-950/80 backdrop-blur-sm">
         <div class="max-w-screen-2xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <h2 class="text-5xl font-bold tracking-tight text-blue-400">🔐 Admin View</h2>
-                <p class="text-zinc-400 mt-3">Authorized Access Only</p>
+            <div class="text-center mb-16">
+                <h2 class="section-title text-5xl md:text-6xl font-semibold tracking-tight reveal">Giveaways Every Stream</h2>
             </div>
-            <div class="max-w-2xl mx-auto liquid-glass rounded-3xl p-12 text-center">
-                <p class="text-2xl">Welcome back, Jace.</p>
-                <p class="mt-8 text-zinc-400">This is your private admin dashboard.</p>
-                <!-- Add whatever admin content you want here later -->
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-1">
+                    <span class="px-5 py-2 bg-emerald-500/10 text-emerald-400 text-sm font-bold rounded-2xl">EVERY STREAM</span>
+                    <h3 class="text-4xl font-semibold mt-8">Counter-Strike Drops</h3>
+                    <p class="text-zinc-400 mt-6 text-lg">Weapon skins, cases, gloves and more dropped live on stream.</p>
+                </div>
+                
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 card-hover reveal reveal-delay-2">
+                    <span class="px-5 py-2 bg-purple-500/10 text-purple-400 text-sm font-bold rounded-2xl">BI-WEEKLY</span>
+                    <h3 class="text-4xl font-semibold mt-8">Cash Rewards</h3>
+                    <p class="text-zinc-400 text-xl mt-6">Top supporters win <strong>$150 every two weeks</strong></p>
+                    <p class="text-emerald-400 mt-4 text-lg">1st $75 • 2nd $50 • 3rd $25</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Existing sections (Giveaways, SkinSwap, SkinApe, Winners) + Footer -->
+    <!-- SkinSwap -->
+    <section id="skinswap" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="max-w-5xl mx-auto liquid-glass border border-white/10 rounded-3xl p-12 md:p-16 card-hover reveal reveal-delay-1">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-1/2">
+                        <span class="px-5 py-2 bg-orange-500/10 text-orange-400 text-sm font-bold rounded-2xl">POWERED BY SKINSWAP</span>
+                        <h2 class="text-5xl font-semibold tracking-tight mt-8">Turn Old Boring Skins into New Cool Ones</h2>
+                        <p class="mt-8 text-zinc-300 text-xl">Seamlessly upgrade your inventory with fresh, flashy skins in seconds.</p>
+                        <a href="https://skinswap.com/r/1hp" target="_blank" 
+                           class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-orange-500 to-amber-500 text-black font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
+                            <i class="fas fa-exchange-alt"></i> UPGRADE NOW
+                        </a>
+                    </div>
+                    <div class="lg:w-1/2 text-center reveal reveal-delay-3">
+                        <div class="text-[8rem] mb-6 opacity-90">💎</div>
+                        <h3 class="text-4xl font-semibold">Instant Skin Upgrades</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SkinApe -->
+    <section id="skinape" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="max-w-4xl mx-auto liquid-glass border border-white/10 rounded-3xl p-10 md:p-14 card-hover reveal reveal-delay-1">
+                <div class="text-center">
+                    <span class="px-5 py-2 bg-violet-500/10 text-violet-400 text-sm font-bold rounded-2xl">NEW WAY TO EARN</span>
+                    <h2 class="text-5xl font-semibold tracking-tight mt-8">Win FREE CS2 Skins by Playing Games!</h2>
+                    <p class="mt-8 text-zinc-300 text-xl">Play games, complete fun tasks, or take quick quizzes to earn credits. Use them to open cases or buy CS2 skins directly — no Steam login needed and no endless grinds!</p>
+                    <a href="https://skinape.com/app/redeem-code?promoCode=59O0VNLQ" target="_blank" 
+                       class="mt-10 glass-button inline-flex items-center gap-x-3 bg-gradient-to-r from-violet-500 to-fuchsia-500 text-white font-bold text-xl px-12 py-7 rounded-3xl btn-click reveal reveal-delay-2">
+                        <i class="fas fa-gamepad"></i> START EARNING SKINS FREE
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent Winners -->
+    <section id="winners" class="py-24 md:py-32 bg-zinc-900/90 backdrop-blur-sm">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="section-title text-5xl md:text-6xl font-semibold tracking-tight reveal">Recent Bi-Weekly Winners</h2>
+            </div>
+            <div class="max-w-3xl mx-auto grid md:grid-cols-3 gap-8">
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-1">
+                    <div class="text-6xl mb-6">🥇</div>
+                    <h3 class="font-bold text-3xl text-amber-400">1st — $75</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">Telephone</p>
+                </div>
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-2">
+                    <div class="text-6xl mb-6">🥈</div>
+                    <h3 class="font-bold text-3xl text-slate-300">2nd — $50</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">pandav2</p>
+                </div>
+                <div class="liquid-glass border border-white/10 rounded-3xl p-10 text-center card-hover reveal reveal-delay-3">
+                    <div class="text-6xl mb-6">🥉</div>
+                    <h3 class="font-bold text-3xl text-amber-800">3rd — $25</h3>
+                    <p class="text-zinc-300 mt-8 font-medium text-2xl">nope</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMIN VIEW -->
+    <section id="admin-view" class="hidden py-24 bg-zinc-950">
+        <div class="max-w-screen-2xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-6xl font-bold tracking-tight text-blue-400">🔐 Admin View</h2>
+                <p class="text-zinc-400 mt-4">Private Dashboard</p>
+            </div>
+            <div class="max-w-2xl mx-auto liquid-glass rounded-3xl p-16 text-center">
+                <p class="text-3xl mb-6">Welcome back, Jace.</p>
+                <p class="text-xl text-zinc-300">This area is for admin tools and private controls.</p>
+                <!-- Add more admin content here as needed -->
+            </div>
+        </div>
+    </section>
 
     <footer class="bg-black/80 backdrop-blur-md py-16 text-center text-zinc-500 text-sm">
         <p>JaceAt1HP • Powered by amazing partners</p>
@@ -234,20 +320,25 @@
                 document.getElementById('admin-view').scrollIntoView({ behavior: 'smooth' });
             } else {
                 const input = document.getElementById('pin-input');
-                input.classList.add('!border-red-500');
-                setTimeout(() => input.classList.remove('!border-red-500'), 800);
+                input.classList.add('!border-red-500', 'animate-pulse');
+                setTimeout(() => {
+                    input.classList.remove('!border-red-500', 'animate-pulse');
+                }, 1000);
             }
         }
 
-        // Rest of your existing scripts (Twitch, Reveal, etc.)
+        // Scroll Reveal
         function initScrollReveal() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach((entry, index) => {
                     if (entry.isIntersecting) {
-                        setTimeout(() => entry.target.classList.add('visible'), index * 80);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 80);
                     }
                 });
             }, { threshold: 0.15 });
+
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         }
 
